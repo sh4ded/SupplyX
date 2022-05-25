@@ -4,10 +4,14 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Home from './pages/Home'
 import SignIn from './pages/SignIn'
 import SignUp from './pages/SignUp'
+import Navbar from './components/navbar/navbar'
+import Footer from './components/footer/footer'
 
 function App() {
   return (
     <div className="App">
+      <Navbar />
+      <div style={{backgroundColor:'#EFF8FF'}}>
       <Router>
       <Routes>
     <Route path='/' element={<Home />} />
@@ -15,6 +19,8 @@ function App() {
     <Route path='/sign-up' element={<SignUp />} />
     </Routes>
   </Router>
+  </div>
+  <Footer />
     </div>
   );
 }
