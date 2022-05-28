@@ -7,16 +7,19 @@ import SignUp from './pages/SignUp'
 import Navbar from './components/navbar/navbar.js'
 import Footer from './components/footer/footer.js'
 import UserDash from './components/user-dashboard.js'
+import {useState} from 'react';
 
 function App() {
+  const [accessToken, setAccessToken] = useState("");
+  const [userID, setUserID] = useState("");
   return (
     <div className="App">
       <div style={{backgroundColor:'#EFF8FF'}}>
       <Routes>
-    <Route path='/' element={<Home />} />
-    <Route path='/sign-in' element={<SignIn />} />
-    <Route path='/sign-up' element={<SignUp />} />
-    <Route path='/user-dashboard' element={<UserDash />} /> 
+    <Route path='/' element={<Home token={accessToken} setToken={setAccessToken}/>} />
+    <Route path='/sign-in' element={<SignIn token={accessToken} setToken={setAccessToken} id={userID} setId={setUserID}/>} />
+    <Route path='/sign-up' element={<SignUp token={accessToken} setToken={setAccessToken} id={userID} setId={setUserID}/>} />
+    <Route path='/user-dashboard' element={<UserDash token={accessToken} setToken={setAccessToken} id={userID} setId={setUserID}/>} /> 
     </Routes>
   </div>
   <Footer />

@@ -19,8 +19,6 @@ const FormRow = ({objt}) => {
 };
 	const ovalues = objectToArray(objt);
 	const okeys = Object.keys(objt); 
-	console.log(ovalues);
-	console.log(okeys);
 	return(
 	<>
 	{okeys.map((x, idx) => {

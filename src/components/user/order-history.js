@@ -1,7 +1,24 @@
 import React from 'react';
 import FormRow from '../form-row.js'
+import Table from './table.js'
+import {useEffect} from 'react'
+import user from '../../services/user.js'
 
-const UDHistory = () => {
+const UDHistory = ({token, setToken, id, setId}) => {
+	useEffect(() => {
+		const obj = {
+			authorization : `bearer ${token}`,
+    		user_id : id
+		};
+		console.log(obj);
+		user
+		.getAll(obj)
+		.then(response => {
+			console.log(response);
+		})
+		.catch(error => {
+			console.log(error);})
+	})
 	const orders = [
 		{
 			'order_id' : 'QW23334',
@@ -34,7 +51,13 @@ const UDHistory = () => {
 	]
 	return(
 	<>
-	{orders.map((x, idx) => { return (<FormRow key={`${idx}`} objt={x} />)} )}
+	
+	{orders.map((x, idx) => { return (
+		<>
+		<br/>
+		<Table key={idx} objt={x}/>
+		</>) } )}
+	{/*orders.map((x, idx) => { return (<FormRow key={`${idx}`} objt={x} />)} )*/}
 	</>
 	)
 }

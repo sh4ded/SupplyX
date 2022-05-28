@@ -1,7 +1,8 @@
 import React from 'react';
 import FormRow from '../form-row.js'
+import Table from './table.js'
 
-const UDOrders = () => {
+const UDOrders = ({token, setToken, id, setId}) => {
 	const orders = [
 		{
 			'order_id' : 'QW23334',
@@ -34,7 +35,11 @@ const UDOrders = () => {
 	]
 	return(
 	<>
-	{orders.map((x, idx) => { return (<FormRow key={`${idx}`} objt={x} />)} )}
+	{orders.map((x, idx) => { return (
+		<>
+		<br/>
+		<Table key={idx} objt={x}/>
+		</>) } )}
 	</>
 	)
 }

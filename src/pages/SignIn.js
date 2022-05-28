@@ -12,18 +12,35 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-
+import user from '../services/user.js'
+import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import UserDash from '../components/user-dashboard.js'
+import {Routes, Route} from 'react-router-dom';
 
 const theme = createTheme();
 
-export default function SignIn() {
+export default function SignIn({token, setToken, id, setId}) {
+  const [successIn, setSuccessIn] = useState(false);
+  const navigate = useNavigate();
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
+    const obj = {
       email: data.get('email'),
       password: data.get('password'),
-    });
+    };
+    user.login(obj)
+    .then(response => {
+      console.log(response);
+      setToken(response.accessToken);
+      setId(response.id)
+      setSuccessIn(true);
+      navigate('../user-dashboard');
+    })
+    .catch(error => {
+      console.log(error);
+    })
   };
 
   return (
@@ -94,5 +111,6 @@ export default function SignIn() {
         
       </Container>
     </ThemeProvider>
+
   );
 }

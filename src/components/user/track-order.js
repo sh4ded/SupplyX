@@ -4,7 +4,7 @@ import Button from '@mui/material/Button'
 import Box from '@mui/material/Box'
 import {useState} from 'react';
 
-const UDTrack = () => {
+const UDTrack = ({token, setToken, id, setId}) => {
 	const [orderID, setOrderID] = useState("");
 	const [error, setError] = useState(false);
 

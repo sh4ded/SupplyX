@@ -13,11 +13,13 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import styles from './navbarStyles.css'
+import {useNavigate} from 'react-router-dom';
 
 const pages = ['Your Orders', 'New Order', 'Order History', 'Track Order'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
-const Navbar = ({vari, setVari}) => {
+const Navbar = ({vari, setVari, token, setToken}) => {
+  const navigate = useNavigate();
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -26,7 +28,16 @@ const Navbar = ({vari, setVari}) => {
   };
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
+    console.log('hi');
   };
+
+  const handleLogout = (event) => {
+    if (event.target.textContent === 'Logout')
+    {
+      setToken("");
+      navigate('../');
+    }
+  }
 
   const handleCloseNavMenu = (e) => {
     const a = e.target.textContent;
@@ -153,7 +164,7 @@ const Navbar = ({vari, setVari}) => {
             >
               {settings.map((setting) => (
                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
+                  <Typography textAlign="center" onClick={handleLogout}>{setting}</Typography>
                 </MenuItem>
               ))}
             </Menu>

@@ -1,6 +1,6 @@
 import React from 'react';
 
-const UDHome = () => {
+const UDHome = ({token, setToken, id, setId}) => {
 	return(
 	<>
 	<h1>Welcome to SupplyX!</h1>
