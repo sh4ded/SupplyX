@@ -14,10 +14,10 @@ import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import styles from './navbarStyles.css'
 
-const pages = ['Your Orders', 'Pending', 'Recent'];
+const pages = ['Your Orders', 'New Order', 'Order History', 'Track Order'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
-const Navbar = () => {
+const Navbar = ({vari, setVari}) => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -28,7 +28,10 @@ const Navbar = () => {
     setAnchorElUser(event.currentTarget);
   };
 
-  const handleCloseNavMenu = () => {
+  const handleCloseNavMenu = (e) => {
+    const a = e.target.textContent;
+    setVari(pages.indexOf(a) + 1);
+    //console.log(vari);
     setAnchorElNav(null);
   };
 
