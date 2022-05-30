@@ -13,7 +13,7 @@ function Copyright(props) {
         {new Date().getFullYear()}
         {'.'}
         <br/>
-        <p>Made with ❤ at Guindy!</p>
+        Made with ❤ at Guindy!
       </Typography>
     );
   }

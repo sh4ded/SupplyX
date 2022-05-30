@@ -13,25 +13,48 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import {useState} from 'react';
+import Table from './table.js'
+
 
 const UDPlace = ({vari, setVari, token, setToken, id, setId}) => {
 	const [butmsg, setButmsg] = useState('Get Quote');
+  const [render, setRender] = useState(0);
+  const [obj, setObj] = useState([]);
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		if (butmsg[0] === 'G')
 		{
+
 			setButmsg('Place');
+      setRender(1);
+      const data = new FormData(e.currentTarget);
+      setObj([{
+        order_id : 'QW1345',
+        order_date : Date.now(),
+        user_id : `${id}`,
+        source : data.get('source'),
+        destination : data.get('destination'),
+        current_hub : data.get('source'),
+        vehicle_id : null,
+        weight : data.get('weight'),
+        products : data.get('products'),
+        amount : 1223
+      }]);
 		}
 		if (butmsg[0] === 'P')
 		{
 			console.log('Order placed');
-			setVari(0);
+      setRender(2);
+      setTimeout(() => {
+        setVari(0);
+      }, 2000);
 		}
 	}
 
 	return(
 	<>
 	<br/>
+  {render === 0 && <>
 	<Typography component="h1" variant="h5">
             New Order
     </Typography>
@@ -73,6 +96,7 @@ const UDPlace = ({vari, setVari, token, setToken, id, setId}) => {
             required
             fullWidth
           	id="products"
+            name="products"
           	label="Product Description"
           	multiline
           	maxRows={4}
@@ -85,6 +109,26 @@ const UDPlace = ({vari, setVari, token, setToken, id, setId}) => {
               {butmsg}
             </Button>
           </Box>
+          </>}
+          {
+            render === 1 && obj.map((x, idx) => { return (
+    <>
+    <br/>
+    <Table key={idx} objt={x}/>
+    </>) } )}
+    {render === 1 && 
+        <Box component="form" onSubmit={handleSubmit} validate sx={{ mt: 1 }}>
+    <Button
+              type="submit"
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}
+            >
+              {butmsg}
+            </Button>
+            </Box>}
+            {render === 2 && <h1>
+              Order placed Successfully!
+              </h1>}
 	</>
 	)
 }

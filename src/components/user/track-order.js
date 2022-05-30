@@ -3,10 +3,14 @@ import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button'
 import Box from '@mui/material/Box'
 import {useState} from 'react';
+import Table from './table.js'
+import user from '../../services/user.js'
 
 const UDTrack = ({token, setToken, id, setId}) => {
 	const [orderID, setOrderID] = useState("");
 	const [error, setError] = useState(false);
+	const [obj, setObj] = useState([]);
+	const [render, setRender] = useState(0);
 
 	const handleChange = (e) => {
 		setOrderID(e.target.value);
@@ -23,6 +27,20 @@ const UDTrack = ({token, setToken, id, setId}) => {
 		}
 		else{
 			console.log(orderID);
+			user
+			.getId(orderID, {
+				user_id : `${id}`,
+				authorization : `bearer ${token}`
+			})
+			.then(response => {
+				console.log(response.order)
+				setObj([response.order[0]])
+				setRender(1);
+			})
+			.catch(error => {
+				console.log(error)
+				setRender(0);
+			});
 			setOrderID("");
 		}
 	}
@@ -34,6 +52,12 @@ const UDTrack = ({token, setToken, id, setId}) => {
 	<br /><br />
 	<Button variant="contained" type='submit'>Submit</Button>
 	</Box>
+	{
+		render === 1 && obj.map((x, idx) => { return (
+		<>
+		<br/>
+		<Table key={idx} objt={x}/>
+		</>) } )}
 	</>
 	)
 }

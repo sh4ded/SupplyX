@@ -20,11 +20,18 @@ const login = obj => {
 }
 
 const getAll = obj => {
-	const request = axios.get(`${baseUrl}/orders`,obj)
+	const request = axios.post(`${baseUrl}/orders`,obj)
 	console.log(obj)
 	return request.then(response => {
 		return response.data
 	})
 }
 
-export default {register, login, getAll};
+const getId = (id, obj) => {
+	const request = axios.post(`${baseUrl}/orders/${id}`,obj)
+	return request.then(response => {
+		return response.data
+	})
+}
+
+export default {register, login, getAll, getId};
