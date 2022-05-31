@@ -1,27 +1,17 @@
 import React from 'react';
-import Typography from '@mui/material/Typography';
-import Link from '@mui/material/Link';
 import styles from './footerStyles.css'
-
-function Copyright(props) {
-    return (
-      <Typography variant="body2" color="text.secondary" align="center" {...props}>
-        {'Copyright © '}
-        <Link color="inherit" href="../">
-          SupplyX
-        </Link>{' '}
-        {new Date().getFullYear()}
-        {'.'}
-        <br/>
-        Made with ❤ at Guindy!
-      </Typography>
-    );
-  }
 
 function Footer() {
     return(
-        <div style={{backgroundColor:'#FFB400'}}>
-            <Copyright sx={{ mt: 8, mb: 4 }} />
+        <div style={{backgroundColor:'#FFB400', color:'blue'}} className="footbox">
+            <div>
+              <p>
+              Designed and Developed by SupplyX Team
+              </p>
+              <p>
+                Copyright © <a href={'/'}>SupplyX</a> 2022
+              </p>
+            </div>
             
         </div>
     )

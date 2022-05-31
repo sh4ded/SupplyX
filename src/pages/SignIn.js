@@ -49,7 +49,8 @@ export default function SignIn({token, setToken, id, setId}) {
         <CssBaseline />
         <Box
           sx={{
-            marginTop: 8,
+            marginTop: 5,
+            marginBottom: 5,
             bgcolor: '#EFF8FF',
             display: 'flex',
             flexDirection: 'column',

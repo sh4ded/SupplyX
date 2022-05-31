@@ -1,3 +1,9 @@
-.footmain{
-    background-color: #FFB400;
+.footbox{
+    padding: 0.4rem 0;
+    font-size: 1rem;
+}
+
+a{
+    color: white;
+    text-decoration-line: none;
 }

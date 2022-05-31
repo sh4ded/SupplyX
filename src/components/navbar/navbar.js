@@ -51,7 +51,7 @@ const Navbar = ({vari, setVari, token, setToken}) => {
   };
 
   return (
-    <AppBar position="static" style={{backgroundColor:'#FFB400'}}>
+    <AppBar position="static" style={{backgroundColor:'#FFB400'}} marginBottom='5'>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />

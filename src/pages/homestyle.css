@@ -1,0 +1,14 @@
+.leftcont{
+    width: 50%;
+    position: absolute;
+}
+
+.rightcont{
+    width: 46%;
+    position: relative;
+    margin-left: 50%;
+}
+
+.totcont{
+    margin: 3rem 1rem 5rem 1rem;
+}
