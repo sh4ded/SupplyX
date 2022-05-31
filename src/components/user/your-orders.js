@@ -20,7 +20,7 @@ const UDOrders = ({token, setToken, id, setId}) => {
 		})
 		.catch(error => {
 			console.log(error);})
-	})
+	}, [])
 	
 	return(
 	<>

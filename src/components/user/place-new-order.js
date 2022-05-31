@@ -14,6 +14,7 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import {useState} from 'react';
 import Table from './table.js'
+import user from '../../services/user.js'
 
 
 const UDPlace = ({vari, setVari, token, setToken, id, setId}) => {
@@ -37,17 +38,28 @@ const UDPlace = ({vari, setVari, token, setToken, id, setId}) => {
         current_hub : data.get('source'),
         vehicle_id : null,
         weight : data.get('weight'),
-        products : data.get('products'),
-        amount : 1223
+        product : data.get('products'),
+        amount : 1223,
+        authorization : `bearer ${token}`
       }]);
 		}
 		if (butmsg[0] === 'P')
 		{
-			console.log('Order placed');
+      console.log(obj);
+      user
+      .placeOrder(obj[0])
+      .then(response => {
+        console.log(response);
+        console.log('Order placed');
       setRender(2);
       setTimeout(() => {
         setVari(0);
       }, 2000);
+      })
+      .catch(error => {
+        console.log(error);
+      })
+			
 		}
 	}
 

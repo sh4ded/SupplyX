@@ -6,16 +6,24 @@ import UDOrders from './user/your-orders.js'
 import UDPlace from './user/place-new-order.js'
 import UDHistory from './user/order-history.js'
 import UDTrack from './user/track-order.js'
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
+import {useNavigate} from 'react-router-dom';
 
 const UserDash = ({token, setToken, id, setId}) => {
+	const navigate = useNavigate();
+	useEffect(() => {
+		if (token === "")
+		{
+			navigate('../');
+		}
+	})
 	const [vari, setVari] = useState(0);
 	return(
 		<>
 		<Navbar vari={vari} setVari={setVari} token={token} setToken={setToken} id={id} setId={setId}/>
 		{vari === 0 && <UDHome token={token} setToken={setToken} id={id} setId={setId}/>}
 		{vari === 1 && <UDOrders token={token} setToken={setToken} id={id} setId={setId}/>}
-		{vari === 2 && <UDPlace token={token} setToken={setToken} vari={vari} setVari={setVari} />}
+		{vari === 2 && <UDPlace token={token} setToken={setToken} id={id} setId={setId} vari={vari} setVari={setVari} />}
 		{vari === 3 && <UDHistory token={token} setToken={setToken} id={id} setId={setId}/>}
 		{vari === 4 && <UDTrack token={token} setToken={setToken} id={id} setId={setId}/>}
       		{/*<Routes>

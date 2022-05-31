@@ -34,4 +34,18 @@ const getId = (id, obj) => {
 	})
 }
 
-export default {register, login, getAll, getId};
+const addUser = (obj) => {
+	const request = axios.post(`${baseUrl}/register`, obj)
+	return request.then(response => {
+		return response.data
+	})
+}
+
+const placeOrder = (obj) => {
+	const request = axios.post(`${baseUrl}/addOrder`, obj)
+	return request.then(response => {
+		return response.data
+	})
+}
+
+export default {register, login, getAll, getId, addUser, placeOrder};

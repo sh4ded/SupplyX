@@ -15,13 +15,12 @@ const UDHistory = ({token, setToken, id, setId}) => {
 		user
 		.getAll(obj)
 		.then(response => {
-			console.log(response);
 			setOrders(response.orders);
+			console.log(response);
 		})
 		.catch(error => {
 			console.log(error);})
-	})
-	
+	}, [])
 	return(
 	<>
 	

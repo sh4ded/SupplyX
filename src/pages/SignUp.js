@@ -12,18 +12,33 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import user from '../services/user.js'
+import user from '../services/user.js';
+import {useNavigate} from 'react-router-dom';
 
 const theme = createTheme();
 
 export default function SignUp({token, setToken, id, setId}) {
+  const navigate = useNavigate();
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
+    const obj = {
       email: data.get('email'),
       password: data.get('password'),
-    });
+      company_name : data.get('company'),
+      location: data.get('location')
+    };
+    user
+    .addUser(obj)
+    .then(response => {
+      setToken(response.accessToken);
+      setId(response.id);
+      console.log(response);
+      navigate('/user-dashboard');
+    })
+    .catch(error => {
+      console.log(error);
+    })
   };
 
   return (
@@ -46,25 +61,24 @@ export default function SignUp({token, setToken, id, setId}) {
           </Typography>
           <Box component="form" Validate onSubmit={handleSubmit} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  autoComplete="given-name"
-                  name="firstName"
-                  required 
-                  fullWidth
-                  id="firstName"
-                  label="First Name"
-                  autoFocus
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
+              <Grid item xs={12}>
                 <TextField
                   required
                   fullWidth
-                  id="lastName"
-                  label="Last Name"
-                  name="lastName"
-                  autoComplete="family-name"
+                  id="name"
+                  label="Name"
+                  name="name"
+                  autoComplete="name"
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  id="company"
+                  label="Company name"
+                  name="company"
+                  autoComplete="company"
                 />
               </Grid>
               <Grid item xs={12}>
@@ -73,7 +87,6 @@ export default function SignUp({token, setToken, id, setId}) {
                   fullWidth
                   id="email"
                   label="Email Address"
-          
                   name="email"
                   autoComplete="email"
                 />
@@ -82,23 +95,21 @@ export default function SignUp({token, setToken, id, setId}) {
                 <TextField
                   required
                   fullWidth
-                  name="password"
-                  label="Password"
-                
-                  type="password"
-                  id="password"
-                  autoComplete="new-password"
+                  name="location"
+                  label="Location"
+                  id="location"
+                  autoComplete="location"
                 />
               </Grid>
               <Grid item xs={12}>
                 <TextField
                   required
                   fullWidth
-                  name="mobile"
-                  label="Mobile No."
-                 
-                  id="mobile-no"
-                  autoComplete="mobile-no"
+                  name="password"
+                  label="Password"
+                  type="password"
+                  id="password"
+                  autoComplete="new-password"
                 />
               </Grid>
               <Grid item xs={12}>
