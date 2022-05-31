@@ -29,7 +29,17 @@ const UDPlace = ({vari, setVari, token, setToken, id, setId}) => {
 			setButmsg('Place');
       setRender(1);
       const data = new FormData(e.currentTarget);
-      setObj([{
+      const objc = {
+        authorization : `bearer ${token}`,
+        id : `${id}`,
+        from_warehouse : data.get('source'),
+        to_warehouse : data.get('destination')
+      }
+      user
+      .getPrice(objc)
+      .then(response => {
+        console.log(response);
+        setObj([{
         order_id : 'QW1345',
         order_date : Date.now(),
         user_id : `${id}`,
@@ -39,9 +49,14 @@ const UDPlace = ({vari, setVari, token, setToken, id, setId}) => {
         vehicle_id : null,
         weight : data.get('weight'),
         product : data.get('products'),
-        amount : 1223,
+        amount : response.pricing.price_per_kg*parseInt(data.get('weight')),
         authorization : `bearer ${token}`
       }]);
+      })
+      .catch(error => {
+        console.log(error);
+      })
+      
 		}
 		if (butmsg[0] === 'P')
 		{
@@ -91,7 +106,6 @@ const UDPlace = ({vari, setVari, token, setToken, id, setId}) => {
               label="Destination"
               name="destination"
               autoComplete="Destination"
-              autoFocus
             />
             <TextField
               margin="normal"
@@ -101,7 +115,6 @@ const UDPlace = ({vari, setVari, token, setToken, id, setId}) => {
               label="Weight (in kg)"
               name="weight"
               autoComplete="Weight"
-              autoFocus
             />
             <TextField
             margin="normal"

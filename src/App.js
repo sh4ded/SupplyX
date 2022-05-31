@@ -13,15 +13,13 @@ function App() {
   const [accessToken, setAccessToken] = useState(""); 
   const [userID, setUserID] = useState("");
   return (
-    <div className="App">
-      <div style={{backgroundColor:'#EFF8FF'}}>
+    <div className="App" style={{backgroundColor:'#EFF8FF'}}>
       <Routes>
     <Route path='/' element={<Home token={accessToken} setToken={setAccessToken}/>} />
     <Route path='/sign-in' element={<SignIn token={accessToken} setToken={setAccessToken} id={userID} setId={setUserID}/>} />
     <Route path='/sign-up' element={<SignUp token={accessToken} setToken={setAccessToken} id={userID} setId={setUserID}/>} />
     <Route path='/user-dashboard' element={<UserDash token={accessToken} setToken={setAccessToken} id={userID} setId={setUserID}/>} /> 
     </Routes>
-  </div>
   <Footer />
   </div>
   );

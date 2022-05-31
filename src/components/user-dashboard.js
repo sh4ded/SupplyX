@@ -12,6 +12,16 @@ import {useNavigate} from 'react-router-dom';
 const UserDash = ({token, setToken, id, setId}) => {
 	const navigate = useNavigate();
 	useEffect(() => {
+  	const unloadCallback = (event) => {
+    	event.preventDefault();
+    	event.returnValue = "";
+    return "";
+  	};
+
+  	window.addEventListener("beforeunload", unloadCallback);
+  	return () => window.removeEventListener("beforeunload", unloadCallback);
+	}, []);
+	useEffect(() => {
 		if (token === "")
 		{
 			navigate('../');

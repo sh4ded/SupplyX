@@ -50,6 +50,7 @@ export default function SignIn({token, setToken, id, setId}) {
         <Box
           sx={{
             marginTop: 8,
+            bgcolor: '#EFF8FF',
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
