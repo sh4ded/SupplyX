@@ -14,7 +14,7 @@ function App() {
   const [userID, setUserID] = useState("");
   return (
     <div className="App" style={{backgroundColor:'#EFF8FF'}}>
-      <Navbar />
+      
       <Routes>
     <Route path='/' element={<Home token={accessToken} setToken={setAccessToken}/>} />
     <Route path='/sign-in' element={<SignIn token={accessToken} setToken={setAccessToken} id={userID} setId={setUserID}/>} />
