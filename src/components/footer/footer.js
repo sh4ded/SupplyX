@@ -3,7 +3,7 @@ import styles from './footerStyles.css'
 
 function Footer() {
     return(
-        <div style={{backgroundColor:'#FFB400', color:'blue'}} className="footbox">
+        <div style={{backgroundColor:'#FFB400', color:'#474744'}} className="footbox">
             <div>
               <p>
               Designed and Developed by SupplyX Team

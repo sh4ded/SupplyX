@@ -1,14 +1,40 @@
+div{
+    text-align: center;
+    font-size: 1.5rem;
+}
+
+h1{
+    color: #2994B2;
+    font-size: 4rem;
+}
+
+h2{
+    color: #FFB400;
+}
+
+.homep{
+    color: #474744;
+    text-align: left;
+}
+
 .leftcont{
-    width: 50%;
+    width: 40%;
     position: absolute;
+    margin: 0 3rem 0 6rem;
 }
 
 .rightcont{
-    width: 46%;
+    width: 40%;
     position: relative;
     margin-left: 50%;
+    margin-top: 5.5rem;
 }
 
 .totcont{
     margin: 3rem 1rem 5rem 1rem;
+}
+
+.aboutus{
+    width: 70%;
+    margin: auto;
 }

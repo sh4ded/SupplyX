@@ -42,12 +42,13 @@ export default function SignUp({token, setToken, id, setId}) {
   };
 
   return (
+
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
           sx={{
-            marginTop: 5,
+            paddingTop: 5,
             marginBottom: 5,
             display: 'flex',
             flexDirection: 'column',
@@ -57,7 +58,7 @@ export default function SignUp({token, setToken, id, setId}) {
           <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
             <LockOutlinedIcon />
           </Avatar>
-          <Typography component="h1" variant="h5">
+          <Typography component="h1" variant="h5" style={{color: '#FFB400'}}>
             Sign up
           </Typography>
           <Box component="form" Validate onSubmit={handleSubmit} sx={{ mt: 3 }}>

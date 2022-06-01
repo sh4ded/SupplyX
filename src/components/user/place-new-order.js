@@ -79,7 +79,7 @@ const UDPlace = ({vari, setVari, token, setToken, id, setId}) => {
 	}
 
 	return(
-	<>
+	<div style={{minHeight: '75vh', margin: '0 2rem'}}>
 	<br/>
   {render === 0 && <>
 	<Typography component="h1" variant="h5">
@@ -154,7 +154,7 @@ const UDPlace = ({vari, setVari, token, setToken, id, setId}) => {
             {render === 2 && <h1>
               Order placed Successfully!
               </h1>}
-	</>
+	</div>
 	)
 }
 

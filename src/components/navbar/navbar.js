@@ -15,10 +15,10 @@ import AdbIcon from '@mui/icons-material/Adb';
 import styles from './navbarStyles.css'
 import {useNavigate} from 'react-router-dom';
 
-const pages = ['Your Orders', 'New Order', 'Order History', 'Track Order'];
+
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
-const Navbar = ({vari, setVari, token, setToken}) => {
+const Navbar = ({pages, vari, setVari, token, setToken, condition}) => {
   const navigate = useNavigate();
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -140,7 +140,7 @@ const Navbar = ({vari, setVari, token, setToken}) => {
             ))}
           </Box>
 
-          <Box sx={{ flexGrow: 0 }}>
+          {condition === 0 && <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar alt="Profile" src="https://media-exp1.licdn.com/dms/image/C5603AQEv-4TKzSDFqQ/profile-displayphoto-shrink_100_100/0/1649443062385?e=1658966400&v=beta&t=CnocR1NbmPencBkPPEVFJ0wYHYLf441Ca5WVkGN6XmM" />
@@ -168,7 +168,7 @@ const Navbar = ({vari, setVari, token, setToken}) => {
                 </MenuItem>
               ))}
             </Menu>
-          </Box>
+          </Box>}
         </Toolbar>
       </Container>
     </AppBar>

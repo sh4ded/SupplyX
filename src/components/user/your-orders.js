@@ -23,13 +23,13 @@ const UDOrders = ({token, setToken, id, setId}) => {
 	}, [])
 	
 	return(
-	<>
+	<div style={{minHeight: '75vh', margin: '0 2rem'}}>
 	{orders.map((x, idx) => { return (
 		<>
 		<br/>
 		<Table key={idx} objt={x}/>
 		</>) } )}
-	</>
+	</div>
 	)
 }
 

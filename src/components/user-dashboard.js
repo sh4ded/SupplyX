@@ -10,6 +10,7 @@ import {useState, useEffect} from 'react';
 import {useNavigate} from 'react-router-dom';
 
 const UserDash = ({token, setToken, id, setId}) => {
+	const pages = ['Your Orders', 'New Order', 'Order History', 'Track Order'];
 	const navigate = useNavigate();
 	useEffect(() => {
   	const unloadCallback = (event) => {
@@ -30,7 +31,7 @@ const UserDash = ({token, setToken, id, setId}) => {
 	const [vari, setVari] = useState(0);
 	return(
 		<>
-		<Navbar vari={vari} setVari={setVari} token={token} setToken={setToken} id={id} setId={setId}/>
+		<Navbar pages={pages} vari={vari} setVari={setVari} token={token} setToken={setToken} id={id} setId={setId} condition={0}/>
 		{vari === 0 && <UDHome token={token} setToken={setToken} id={id} setId={setId}/>}
 		{vari === 1 && <UDOrders token={token} setToken={setToken} id={id} setId={setId}/>}
 		{vari === 2 && <UDPlace token={token} setToken={setToken} id={id} setId={setId} vari={vari} setVari={setVari} />}

@@ -22,7 +22,7 @@ const UDHistory = ({token, setToken, id, setId}) => {
 			console.log(error);})
 	}, [])
 	return(
-	<>
+	<div style={{minHeight: '75vh', margin: '0 2rem'}}>
 	
 	{orders.map((x, idx) => { return (
 		<>
@@ -30,7 +30,7 @@ const UDHistory = ({token, setToken, id, setId}) => {
 		<Table key={idx} objt={x}/>
 		</>) } )}
 	{/*orders.map((x, idx) => { return (<FormRow key={`${idx}`} objt={x} />)} )*/}
-	</>
+	</div>
 	)
 }
 
