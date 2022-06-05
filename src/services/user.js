@@ -55,4 +55,11 @@ const getPrice = (obj) => {
 	})
 }
 
-export default {register, login, getAll, getId, addUser, placeOrder, getPrice};
+const getWarehouse = (id, obj) => {
+	const request = axios.post(`${baseUrl}/warehouse/${id}`, obj)
+	return request.then(response => {
+		return response.data
+	})
+}
+
+export default {register, login, getAll, getId, addUser, placeOrder, getPrice, getWarehouse};

@@ -36,6 +36,7 @@ const UDTrack = ({token, setToken, id, setId}) => {
 			setTimeout(() => {
     		setError(false);
   			}, 1000);
+			
 		}
 		else{
 			console.log(orderID);
@@ -45,11 +46,41 @@ const UDTrack = ({token, setToken, id, setId}) => {
 				authorization : `bearer ${token}`
 			})
 			.then(response => {
-				console.log(response.order)
-				setObj([response.order[0]])
+				user
+			.getWarehouse('hola',{
+				user_id : `${id}`,
+				authorization : `bearer ${token}`
+			})
+			.then(places => {
+				console.log(places.orders.filter(obj => {
+					return obj.warehouse_id === response.order[0].source
+				}).location);
+				setObj([{
+					'Order ID': response.order[0].order_id,
+					'Order Date': response.order[0].order_date.split('T')[0].split("-").reverse().join("-"),
+					'Source': places.orders.filter(obj => {
+					return obj.warehouse_id === response.order[0].source
+				})[0].location,
+					'Destination': places.orders.filter(obj => {
+					return obj.warehouse_id === response.order[0].destination
+				})[0].location,
+					'Current Hub':places.orders.filter(obj => {
+					return obj.warehouse_id === response.order[0].current_hub
+				})[0].location,
+					'Vehicle ID' : response.order[0].vehicle_id,
+					'Weight' : response.order[0].weight,
+					'Products' : response.order[0].products,
+					'Amount' : response.order[0].amount,
+					'Order Status' : response.order[0].status,
+					'Expected Date' : response.order[0].expected_date.split('T')[0].split("-").reverse().join("-")
+					}]);
 				setRender(1);
 			})
-			.catch(error => {
+			.catch(err => {
+				console.log(err);
+			});		
+			})
+				.catch(error => {
 				console.log(error)
 				setRender(0);
 			});

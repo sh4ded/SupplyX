@@ -7,6 +7,8 @@ import SignUp from './pages/SignUp'
 import Navbar from './components/navbar/navbar.js'
 import Footer from './components/footer/footer.js'
 import UserDash from './components/user-dashboard.js'
+import AdminDash from './components/admin-dashboard.js'
+import AdminIn from './pages/AdminIn.js'
 import {useState} from 'react';
 
 function App() {
@@ -17,6 +19,8 @@ function App() {
       
       <Routes>
     <Route path='/' element={<Home token={accessToken} setToken={setAccessToken}/>} />
+    <Route path='/admin' element={<AdminIn token={accessToken} setToken={setAccessToken} id={userID} setId={setUserID} />} />
+    <Route path='/admin-dashboard' element={<AdminDash token={accessToken} setToken={setAccessToken} id={userID} setId={setUserID} /> } />
     <Route path='/sign-in' element={<SignIn token={accessToken} setToken={setAccessToken} id={userID} setId={setUserID}/>} />
     <Route path='/sign-up' element={<SignUp token={accessToken} setToken={setAccessToken} id={userID} setId={setUserID}/>} />
     <Route path='/user-dashboard' element={<UserDash token={accessToken} setToken={setAccessToken} id={userID} setId={setUserID}/>} /> 

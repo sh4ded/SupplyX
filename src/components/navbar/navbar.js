@@ -41,6 +41,14 @@ const Navbar = ({pages, vari, setVari, token, setToken, condition}) => {
 
   const handleCloseNavMenu = (e) => {
     const a = e.target.textContent;
+    if (a == 'Sign In')
+    {
+      navigate('./sign-in');
+    }
+    if (a === 'Sign Up')
+    {
+      navigate('./sign-up');
+    }
     setVari(pages.indexOf(a) + 1);
     //console.log(vari);
     setAnchorElNav(null);

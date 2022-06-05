@@ -5,6 +5,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
+import Autocomplete from '@mui/material/Autocomplete';
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
@@ -12,15 +13,38 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import Table from './table.js'
 import user from '../../services/user.js'
 
 
 const UDPlace = ({vari, setVari, token, setToken, id, setId}) => {
+  const [places, setPlaces] = useState([]);
+  const [placenames, setPlacenames] = useState([]);
+  const [source, setSource] = useState();
+  const [destination, setDestination] = useState();
+  useEffect(()=>{
+    user
+    .getWarehouse('hi',{
+      user_id : `${id}`,
+      authorization : `bearer ${token}`
+    })
+    .then(response => {
+      //console.log(response.orders);
+      setPlaces(response.orders);
+      setPlacenames(places.map(a => {
+        return a.location}));
+      console.log(placenames);
+      console.log(places)
+    })
+    .catch(err => {
+      console.log(err);
+    })
+  }, []);
 	const [butmsg, setButmsg] = useState('Get Quote');
   const [render, setRender] = useState(0);
   const [obj, setObj] = useState([]);
+  const [fobj, setFobj] = useState([]);
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		if (butmsg[0] === 'G')
@@ -32,25 +56,32 @@ const UDPlace = ({vari, setVari, token, setToken, id, setId}) => {
       const objc = {
         authorization : `bearer ${token}`,
         id : `${id}`,
-        from_warehouse : data.get('source'),
-        to_warehouse : data.get('destination')
+        from_warehouse : source.warehouse_id,
+        to_warehouse : destination.warehouse_id
       }
       user
       .getPrice(objc)
       .then(response => {
         console.log(response);
         setObj([{
-        order_id : 'QW1345',
         order_date : Date.now(),
         user_id : `${id}`,
-        source : data.get('source'),
-        destination : data.get('destination'),
-        current_hub : data.get('source'),
+        source : source.warehouse_id,
+        destination : destination.warehouse_id,
+        current_hub : source.warehouse_id,
         vehicle_id : null,
         weight : data.get('weight'),
         product : data.get('products'),
         amount : response.pricing.price_per_kg*parseInt(data.get('weight')),
         authorization : `bearer ${token}`
+      }]);
+        console.log(obj);
+        setFobj([{
+        'Source' : source.location,
+        'Destination' : destination.location,
+        'Net Weight' : data.get('weight'),
+        'Product' : data.get('products'),
+        'Amount' : response.pricing.price_per_kg*parseInt(data.get('weight'))
       }]);
       })
       .catch(error => {
@@ -86,7 +117,35 @@ const UDPlace = ({vari, setVari, token, setToken, id, setId}) => {
             New Order
     </Typography>
 	<Box component="form" onSubmit={handleSubmit} validate sx={{ mt: 1 }}>
-            <TextField
+  <Autocomplete
+    margin="normal"
+      id="source"
+      required
+      options={places}
+      renderInput={params => (
+        <TextField {...params} margin="normal" fullWidth label="Source" variant="outlined" /> )}
+      getOptionLabel={option => (option.location)}
+      value={source}
+      onChange={(_event, newSource) => {
+    setSource(newSource);
+    console.log(source);
+  }}
+    />
+    <Autocomplete
+    margin="normal"
+      id="destination"
+      required
+      options={places}
+      renderInput={params => (
+        <TextField {...params} margin="normal" fullWidth label="Destination" variant="outlined" /> )}
+      getOptionLabel={option => (option.location)}
+      value={destination}
+      onChange={(_event, newDestination) => {
+    setDestination(newDestination);
+    console.log(destination);
+  }}
+    />
+            {/*<TextField
               margin="normal"
               required
               fullWidth
@@ -106,7 +165,7 @@ const UDPlace = ({vari, setVari, token, setToken, id, setId}) => {
               label="Destination"
               name="destination"
               autoComplete="Destination"
-            />
+            />*/}
             <TextField
               margin="normal"
               required
@@ -136,7 +195,7 @@ const UDPlace = ({vari, setVari, token, setToken, id, setId}) => {
           </Box>
           </>}
           {
-            render === 1 && obj.map((x, idx) => { return (
+            render === 1 && fobj.map((x, idx) => { return (
     <>
     <br/>
     <Table key={idx} objt={x}/>
