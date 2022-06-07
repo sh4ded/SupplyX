@@ -12,7 +12,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import user from '../services/user.js'
+import admin from '../services/admin.js'
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import UserDash from '../components/user-dashboard.js'
@@ -20,22 +20,23 @@ import {Routes, Route} from 'react-router-dom';
 
 const theme = createTheme();
 
-export default function SignIn({token, setToken, id, setId}) {
+export default function SignIn({token, setToken, id, setId, wid, setWid}) {
   const [successIn, setSuccessIn] = useState(false);
   const navigate = useNavigate();
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     const obj = {
-      email: data.get('email'),
+      admin_id: data.get('admin_id'),
       password: data.get('password'),
     };
-    user.login(obj)
+    admin.login(obj)
     .then(response => {
       console.log(response);
       setToken(response.accessToken);
-      setId(response.id)
+      setId(response.admin_id)
       setSuccessIn(true);
+      setWid(response.warehouse_id);
       navigate('../admin-dashboard');
     })
     .catch(error => {
@@ -69,10 +70,10 @@ export default function SignIn({token, setToken, id, setId}) {
               margin="normal"
               required
               fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
+              id="admin_id"
+              label="Admin ID"
+              name="admin_id"
+              autoComplete="admin_id"
               autoFocus
             />
             <TextField

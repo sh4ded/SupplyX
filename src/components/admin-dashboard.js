@@ -1,16 +1,15 @@
 import React from 'react';
 import Navbar from './navbar/navbar.js'
 //import { Route, Routes } from 'react-router-dom';
-import UDHome from './user/home.js'
-import UDOrders from './user/your-orders.js'
-import UDPlace from './user/place-new-order.js'
-import UDHistory from './user/order-history.js'
-import UDTrack from './user/track-order.js'
+import ADHome from './admin/home.js'
+import ADPending from './admin/pending-orders.js'
+import ADStatus from './admin/update-status.js'
+import ADHistory from './admin/order-history.js'
 import {useState, useEffect} from 'react';
 import {useNavigate} from 'react-router-dom';
 
-const UserDash = ({token, setToken, id, setId}) => {
-	const pages = ['Your Orders', 'New Order', 'Order History', 'Track Order'];
+const AdminDash = ({token, setToken, id, setId, wid, setWid}) => {
+	const pages = ['Pending Orders', 'Update Status', 'Order History'];
 	const navigate = useNavigate();
 	useEffect(() => {
   	const unloadCallback = (event) => {
@@ -32,11 +31,10 @@ const UserDash = ({token, setToken, id, setId}) => {
 	return(
 		<>
 		<Navbar pages={pages} vari={vari} setVari={setVari} token={token} setToken={setToken} id={id} setId={setId} condition={0}/>
-		{vari === 0 && <UDHome token={token} setToken={setToken} id={id} setId={setId}/>}
-		{vari === 1 && <UDOrders token={token} setToken={setToken} id={id} setId={setId}/>}
-		{vari === 2 && <UDPlace token={token} setToken={setToken} id={id} setId={setId} vari={vari} setVari={setVari} />}
-		{vari === 3 && <UDHistory token={token} setToken={setToken} id={id} setId={setId}/>}
-		{vari === 4 && <UDTrack token={token} setToken={setToken} id={id} setId={setId}/>}
+		{vari === 0 && <ADHome token={token} setToken={setToken} id={id} setId={setId}/>}
+		{vari === 1 && <ADPending token={token} setToken={setToken} id={id} setId={setId} wid={wid} setWid={setWid} />}
+		{vari === 2 && <ADStatus token={token} setToken={setToken} id={id} setId={setId} vari={vari} setVari={setVari} wid={wid} setWid={setWid}/>}
+		{vari === 3 && <ADHistory token={token} setToken={setToken} id={id} setId={setId}/>}
       		{/*<Routes>
     			<Route path='/' element={<UDHome />} />
     			<Route path='/your-orders' element={<UDOrders />} />
@@ -47,4 +45,4 @@ const UserDash = ({token, setToken, id, setId}) => {
 		</>)
 }
 
-export default UserDash;
+export default AdminDash;

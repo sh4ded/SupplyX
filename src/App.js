@@ -14,13 +14,14 @@ import {useState} from 'react';
 function App() {
   const [accessToken, setAccessToken] = useState(""); 
   const [userID, setUserID] = useState("");
+  const [wid, setWid] = useState("");
   return (
     <div className="App" style={{backgroundColor:'#EFF8FF'}}>
       
       <Routes>
     <Route path='/' element={<Home token={accessToken} setToken={setAccessToken}/>} />
-    <Route path='/admin' element={<AdminIn token={accessToken} setToken={setAccessToken} id={userID} setId={setUserID} />} />
-    <Route path='/admin-dashboard' element={<AdminDash token={accessToken} setToken={setAccessToken} id={userID} setId={setUserID} /> } />
+    <Route path='/admin' element={<AdminIn token={accessToken} setToken={setAccessToken} id={userID} setId={setUserID} wid={wid} setWid={setWid}/>} />
+    <Route path='/admin-dashboard' element={<AdminDash token={accessToken} setToken={setAccessToken} id={userID} setId={setUserID} wid={wid} setWid={setWid}/> } />
     <Route path='/sign-in' element={<SignIn token={accessToken} setToken={setAccessToken} id={userID} setId={setUserID}/>} />
     <Route path='/sign-up' element={<SignUp token={accessToken} setToken={setAccessToken} id={userID} setId={setUserID}/>} />
     <Route path='/user-dashboard' element={<UserDash token={accessToken} setToken={setAccessToken} id={userID} setId={setUserID}/>} /> 
