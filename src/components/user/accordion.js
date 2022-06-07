@@ -49,7 +49,7 @@ user
         'Products' : objt.products,
         'Amount' : objt.amount,
         'Status' : objt.status,
-        'Expected Delivery Date' : `${objt.expected_date === null ? null : objt.expected_date.split('T')[0].split("-").reverse().join("-")}`
+        'Expected Delivery Date' : `${objt.expected_date === null ? "" : objt.expected_date.split('T')[0].split("-").reverse().join("-")}`
       });
   })
   .catch(err => {

@@ -15,7 +15,7 @@ const UDHistory = ({token, setToken, id, setId}) => {
 		};
 		console.log(obj);
 		user
-		.getAll(obj)
+		.getAll2(obj)
 		.then(response => {
 			setOrders(response.orders);
 			console.log(response);

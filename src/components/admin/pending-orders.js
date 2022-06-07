@@ -23,7 +23,7 @@ const ADPending = ({token, setToken, id, setId, wid, setWid}) => {
 	<div style={{minHeight: '75vh', margin: '30px 2rem'}}>
 	{obj.map(x => { return (
 		<>
-		<Accordion objt={x} token={token} id={id} wid={wid} refresh={refresh} setRefresh={setRefresh}/>
+		<Accordion key={x.order_id} objt={x} token={token} id={id} wid={wid} refresh={refresh} setRefresh={setRefresh}/>
 		</>)})}
 	</div>)
 }
