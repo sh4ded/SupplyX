@@ -9,9 +9,12 @@ import DialogTitle from '@mui/material/DialogTitle';
 import Autocomplete from '@mui/material/Autocomplete';
 import {useEffect, useState} from 'react';
 import admin from '../../services/admin.js';
+import {useNavigate} from 'react-router-dom';
 
 
-export default function FormDialog({id, token, wid, setRefresh, refresh, wt, oid}) {
+export default function FormDialog({id, token, wid, did, setRefresh, refresh, wt, oid}) {
+  console.log(did);
+  const nav = useNavigate();
   const [vehicles, setVehicles] = useState([]);
   const [vehicleid, setVehicleid] = useState();
   const [open, setOpen] = useState(false);
@@ -47,7 +50,8 @@ export default function FormDialog({id, token, wid, setRefresh, refresh, wt, oid
     admin.getVehicles({
       admin_id : id,
       authorization : `bearer ${token}`,
-      warehouse_id : wid
+      warehouse_id : wid,
+      destination : did
     })
     .then(response => {
       let veh = [];
@@ -72,6 +76,7 @@ export default function FormDialog({id, token, wid, setRefresh, refresh, wt, oid
     setRefresh(1);
     setRender(0);
     setVehicleid();
+    nav('../admin-dashboard');
   };
 
   return (

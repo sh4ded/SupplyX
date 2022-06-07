@@ -106,7 +106,7 @@ admin
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
               <TableCell align="center">
-                <FormDialog id={id} token={token} wid={wid} setRefresh={setRefresh} refresh={refresh} wt={objt.weight} oid={objt.order_id}/>
+                <FormDialog id={id} token={token} wid={wid} did={objt.destination} setRefresh={setRefresh} refresh={refresh} wt={objt.weight} oid={objt.order_id}/>
               </TableCell>
               <TableCell align="center">
                 <Reject id={id} token={token} wid={wid} setRefresh={setRefresh} refresh={refresh} wt={objt.weight} oid={objt.order_id}/>
